@@ -1,10 +1,11 @@
 #include "minisat/core/Solver.h"
 #include <fstream>
 #include <iostream>
-#include <vector>
+#include <chrono>
 
 using namespace Minisat;
 using namespace std;
+using namespace std::chrono;
 
 int main(int argc, char** argv)
 {
@@ -109,19 +110,28 @@ int main(int argc, char** argv)
         }
     }
 
+    auto t1 = high_resolution_clock::now();
     s.solve();
+    auto t2 = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(t2 - t1).count();
 
     // print the sudoku
+    cout << endl;
     for (int i = 0; i < 9; ++i) {
         for (int j = 0; j < 9; ++j) {
             int d = 0;
             while (++d <= 9 and toInt(s.model[v[i][j][d]]) != 0)
                 ;
-            std::cout << d << "  ";
+            if (sudoku[i][j] == 0)
+                std::cout << "  " << d << "  ";
+            else
+                std::cout << " |" << d << "| ";
         }
-        cout << endl;
+        cout << endl << endl;
     }
+    cout << endl;
 
+    cout << "Solved the puzzle in " << duration * 1e-3 << " ms ";
     std::cout << (s.okay() ? ":)" : ":(") << endl;
     return 0;
 }
