@@ -1,12 +1,24 @@
 #include "minisat/core/Solver.h"
+#include <fstream>
 #include <iostream>
 #include <vector>
 
 using namespace Minisat;
 using namespace std;
 
-int main()
+int main(int argc, char** argv)
 {
+    if (argc < 2) {
+        cerr << "No input file provided" << endl;
+        exit(-1);
+    }
+
+    int sudoku[9][9];
+    std::ifstream in(argv[1]);
+    for (int i = 0; i < 9; ++i)
+        for (int j = 0; j < 9; ++j) in >> sudoku[i][j];
+    in.close();
+
     Solver s;
 
     Var v[9][9][10]; // i, j, d
@@ -83,18 +95,6 @@ int main()
             }
         }
     }
-
-    // clauses based on the given sudoku puzzle
-    int sudoku[9][9] = {
-        {0, 0, 0, 0, 0, 0, 1, 9, 0},
-        {0, 0, 1, 7, 0, 0, 0, 0, 8},
-        {0, 4, 9, 2, 0, 0, 0, 6, 0},
-        {0, 0, 0, 3, 0, 0, 0, 0, 0},
-        {8, 0, 0, 0, 0, 7, 3, 0, 0},
-        {0, 0, 0, 6, 0, 5, 0, 0, 2},
-        {0, 8, 0, 0, 0, 9, 0, 0, 0},
-        {0, 0, 4, 0, 0, 0, 5, 0, 0},
-        {5, 0, 0, 0, 0, 0, 2, 1, 4}};
 
     for (int i = 0; i < 9; ++i) {
         for (int j = 0; j < 9; ++j) {
