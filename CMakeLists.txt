@@ -4,6 +4,6 @@ project(sudoku)
 add_subdirectory(minisat EXCLUDE_FROM_ALL)
 include_directories(minisat)
 
-set(CMAKE_CXX_FLAGS "-Wall -pedantic -std=c++11 -O2")
-add_executable(main src/main.cpp)
+set(CMAKE_CXX_FLAGS "-Wall -pedantic -std=c++11 -O3")
+add_executable(main src/main.cpp src/sudoku.cpp)
 target_link_libraries(main minisat-lib-static)
