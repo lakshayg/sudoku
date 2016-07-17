@@ -20,7 +20,17 @@ int& Sudoku::operator()(int row, int col) { return s[row][col]; }
 
 bool Sudoku::valid() { return true; }
 
-bool Sudoku::solved() { return true; }
+bool Sudoku::solved()
+{
+    for (int i = 0; i < 9; ++i) {
+        for (int j = 0; j < 9; ++j) {
+            if (s[i][j] == 0) {
+                return false;
+            }
+        }
+    }
+    return true;
+}
 
 void Sudoku::print()
 {
