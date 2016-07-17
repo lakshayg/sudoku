@@ -99,11 +99,9 @@ int main(int argc, char** argv)
     }
 
     for (int k = 0; k < 81; ++k) {
-        int i(k / 9), j(k % 9);
-        if (sudoku(i, j) != 0) {
-            for (int d = 1; d <= 9; ++d) {
-                s.addClause(sudoku(i, j) == d ? x[i][j][d] : ~x[i][j][d]);
-            }
+        int i(k / 9), j(k % 9), d(sudoku(i, j));
+        if (d != 0) {
+            s.addClause(x[i][j][d]);
         }
     }
 
