@@ -8,6 +8,16 @@ using namespace Minisat;
 using namespace std;
 using namespace std::chrono;
 
+void read_sudoku(std::string filename, Sudoku& s)
+{
+    std::ifstream in(filename);
+    for (int k = 0; k < 81; ++k) {
+        int i(k / 9), j(k % 9);
+        in >> s(i, j);
+    }
+    in.close();
+}
+
 int main(int argc, char** argv)
 {
     if (argc < 2) {
@@ -16,12 +26,7 @@ int main(int argc, char** argv)
     }
 
     Sudoku sudoku;
-    std::ifstream in(argv[1]);
-    for (int k = 0; k < 81; ++k) {
-        int i(k / 9), j(k % 9);
-        in >> sudoku(i, j);
-    }
-    in.close();
+    read_sudoku(argv[1], sudoku);
 
     Solver s;
 

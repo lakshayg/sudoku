@@ -16,6 +16,10 @@ public:
 
 private:
     int s[9][9]; ///< Sudoku data
+
+    bool row_valid(int idx); ///< Checks if the given row is consistent
+    bool col_valid(int idx); ///< Checks if the given column is consistent
+    bool box_valid(int idx); ///< Checks if the given 3x3 box is consistent
 };
 
 #endif

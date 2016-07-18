@@ -10,7 +10,14 @@ Sudoku::Sudoku()
     }
 }
 
-Sudoku::Sudoku(const Sudoku& s) {}
+Sudoku::Sudoku(const Sudoku& p)
+{
+    for (int i = 0; i < 9; ++i) {
+        for (int j = 0; j < 9; ++j) {
+            s[i][j] = p(i, j);
+        }
+    }
+}
 
 Sudoku::Sudoku(Sudoku&& s) {}
 
@@ -35,9 +42,16 @@ bool Sudoku::solved()
 void Sudoku::print()
 {
     for (int i = 0; i < 9; ++i) {
+        if (i % 3 == 0) printf("+---------+---------+---------+\n");
         for (int j = 0; j < 9; ++j) {
+            if (j % 3 == 0) printf("|");
             printf(" %d ", s[i][j]);
         }
-        putchar('\n');
+        printf("|\n");
     }
+    printf("+---------+---------+---------+\n");
 }
+
+bool Sudoku::row_valid(int idx) { return true; }
+bool Sudoku::col_valid(int idx) { return true; }
+bool Sudoku::box_valid(int idx) { return true; }
