@@ -28,6 +28,11 @@ int main(int argc, char** argv)
     Sudoku sudoku;
     read_sudoku(argv[1], sudoku);
 
+    if (not sudoku.valid()) {
+        cerr << "The provided sudoku is invalid" << endl;
+        exit(-1);
+    }
+
     Solver s;
 
     Var v[9][9][10]; // i, j, d
