@@ -45,6 +45,7 @@ int main(int argc, char** argv)
         }
     }
 
+    auto t1 = high_resolution_clock::now();
     // add clauses to the solver
     // each cell must contain only one of the 9 digits
     for (int k = 0; k < 81; ++k) {
@@ -108,6 +109,7 @@ int main(int argc, char** argv)
         }
     }
 
+    // add clauses for numbers which are already filled
     for (int k = 0; k < 81; ++k) {
         int i(k / 9), j(k % 9), d(sudoku(i, j));
         if (d != 0) {
@@ -115,7 +117,6 @@ int main(int argc, char** argv)
         }
     }
 
-    auto t1 = high_resolution_clock::now();
     s.solve();
     auto t2 = high_resolution_clock::now();
     auto duration = duration_cast<microseconds>(t2 - t1).count();
