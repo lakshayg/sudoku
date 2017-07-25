@@ -15,7 +15,7 @@ git clone --recursive https://github.com/lakshayg/sudoku
 ```
 
 ## Building the sovler
-Go to the project root directory and follow these steps to compile the solver (make sure you are using g++ and not clang)
+Go to the project root directory and follow these steps to compile the solver (make sure you are using g++ <s>and not clang</s>)
 ```
 mkdir build
 cd build
